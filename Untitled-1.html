@@ -1,0 +1,266 @@
+</html>
+
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title></title>
+  <link rel="icon" href="pro.png">
+  <link rel="stylesheet" href="obito.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body, html {
+      height: 100%;
+      width: 100%;
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+      color: rgb(8, 0, 0);
+    }
+
+    video#bgVideo {
+      position: fixed;
+      top: 0;
+      left: 0;
+      min-width: 100%;
+      min-height: 100%;
+      object-fit: cover;
+      z-index: -1;
+    }
+
+    .title {
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 36px;
+      font-weight: bold;
+      text-align: center;
+      text-shadow: 0 0 10px #eb0202;
+    }
+
+    .center-box {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(101, 4, 204, 0);
+      border: 2px solid rgba(14, 193, 89, 0.4);
+      padding: 30px;
+      border-radius: 15px;
+      
+      text-align: center;
+      box-shadow: 0 0 20px rgba(0, 123, 255, 0.5);
+    }
+
+    label {
+      display: block;
+      width: 100%;
+      margin: 15px 0 10px;
+      font-size: 14px;
+    }
+
+    select {
+      display: block;
+      width: 100%;
+      margin-bottom: 20px;
+      padding: 10px;
+      border-radius: 5px;
+      border: none;
+      background: rgba(0, 0, 0, 0.808);
+      color: white;
+      appearance: none;
+    }
+
+    select option {
+      background: rgb(255 255 255 / 90%);
+      color: rgb(0, 0, 0);
+    }
+
+    select option:first-child {
+      color: #030303;
+    }
+
+    .subtitle {
+      font-size: 0px;
+      margin-bottom: 20px;
+      font-weight: 600;
+      color: #de0c0c;
+    }
+
+    table {
+      width: 100%;
+      margin-top: 20px;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      padding: 10px;
+      text-align: center;
+    }
+
+    .click-button {
+      margin-top: 30px;
+      padding: 12px 25px;
+      background: #00bcd4;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .click-button:hover {
+      background-color: #0097a7;
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+  <!-- ✅ UNMUTED img(will get unmuted on user click) -->
+  <img id="bgimg" src="74.jpg" alt="Background Image">
+ <header>
+    <h2 class="logo"></h2>
+    <nav class="panel">
+      <a href=>OBITO</a>
+ </nav>
+  </header>
+
+  <div class="title"></div>
+
+  <div class="center-box">
+    <div class="subtitle">UE x OBITO</div>
+
+    <label for="device"></label>
+    <select id="device" onchange="updateModelOptions()">
+      <option value="" disabled="" selected="">Select Device</option>
+      <option value="iPhone">iPhone</option>
+      <option value="Samsung">Samsung</option>
+      <option value="Redmi">Redmi</option>
+      <option value="Oppo">Oppo</option>
+      <option value="Vivo">Vivo</option>
+      <option value="iQOO">iQOO</option>
+      <option value="Realme">Realme</option>
+      <option value="Poco">Poco</option>
+      <option value="Google">Google</option>
+      <option value="Nothing">Nothing</option>
+      <option value="Honor">Honor</option>
+      <option value="Infinix">Infinix</option>
+      <option value="OnePlus">OnePlus</option>
+      <option value="Asus">Asus</option>
+      <option value="LG">LG</option>
+      <option value="Tecno">Tecno</option>
+      <option value="Itel">Itel</option>
+      <option value="Lenovo">Lenovo</option>
+      <option value="Moto">Moto</option>
+    </select>
+
+    <label id="modelLabel" for="model"></label>
+    <select id="model" onchange="showSensitivity()">
+      <option value="">Select Ram</option>
+    </select>
+
+    <div id="sensitivityTable"></div>
+
+    <!-- Aids Button -->
+    <button class="aids-button" onclick="window.location.href='https://www.instagram.com/itz_me_ue_obito?igsh=dGhidXJtbGRlNGlo&utm_source=qr'">Aids</button>
+    
+  </div>
+
+  <!-- ✅ Script: Enable video sound on user interaction -->
+  <script>
+    const modelSelect = document.getElementById("model");
+    const modelLabel = document.getElementById("modelLabel");
+
+    const data = {
+      iPhone: ["6s", "7", "8", "SE 1st Gen", "XR", "XS", "11", "12", "13", "14", "15"],
+      default: ["2GB RAM", "3GB RAM", "4GB RAM", "6GB RAM", "8GB+ RAM"]
+    };
+
+    function updateModelOptions() {
+      const device = document.getElementById("device").value;
+      modelSelect.innerHTML = '';
+      const options = device === "iPhone" ? data.iPhone : data.default;
+      modelLabel.innerText = device === "iPhone" ? "Select Model" : "Select RAM";
+      const defaultOption = document.createElement("option");
+      defaultOption.value = "";
+      defaultOption.textContent = device === "iPhone" ? "Select Model" : "Select RAM";
+      modelSelect.appendChild(defaultOption);
+      options.forEach(option => {
+        const opt = document.createElement("option");
+        opt.value = option;
+        opt.textContent = option;
+        modelSelect.appendChild(opt);
+      });
+    }
+
+    function showSensitivity() {
+      const device = document.getElementById("device").value;
+      const model = modelSelect.value;
+      const table = document.getElementById("sensitivityTable");
+
+      if (!device || !model) {
+        table.innerHTML = "";
+        return;
+      }
+
+      const sensitivity = {
+        iPhone: {
+          XR: { general: 100, redDot: 90, scope2x: 80, scope4x: 75, sniper: 70, freeLook: 60 },
+          "6s": { general: 80, redDot: 70, scope2x: 65, scope4x: 60, sniper: 55, freeLook: 50 },
+          "7": { general: 80, redDot: 70, scope2x: 65, scope4x: 60, sniper: 55, freeLook: 50 },
+          "8": { general: 85, redDot: 75, scope2x: 70, scope4x: 65, sniper: 60, freeLook: 55 },
+          XS: { general: 90, redDot: 80, scope2x: 75, scope4x: 70, sniper: 65, freeLook: 60 },
+          "SE 1st Gen": { general: 75, redDot: 65, scope2x: 60, scope4x: 55, sniper: 50, freeLook: 45 },
+          "11": { general: 100, redDot: 95, scope2x: 85, scope4x: 80, sniper: 75, freeLook: 65 },
+          "12": { general: 105, redDot: 100, scope2x: 90, scope4x: 85, sniper: 80, freeLook: 70 },
+          "13": { general: 105, redDot: 100, scope2x: 90, scope4x: 85, sniper: 80, freeLook: 70 },
+          "14": { general: 110, redDot: 105, scope2x: 95, scope4x: 90, sniper: 85, freeLook: 75 },
+          "15": { general: 110, redDot: 105, scope2x: 95, scope4x: 90, sniper: 85, freeLook: 75 },
+        },
+        default: {
+          "2GB RAM": { general: 50, redDot: 45, scope2x: 40, scope4x: 35, sniper: 30, freeLook: 25 },
+          "3GB RAM": { general: 60, redDot: 55, scope2x: 50, scope4x: 45, sniper: 40, freeLook: 35 },
+          "4GB RAM": { general: 70, redDot: 65, scope2x: 60, scope4x: 55, sniper: 50, freeLook: 45 },
+          "6GB RAM": { general: 85, redDot: 80, scope2x: 75, scope4x: 70, sniper: 65, freeLook: 60 },
+          "8GB+ RAM": { general: 95, redDot: 90, scope2x: 85, scope4x: 80, sniper: 75, freeLook: 70 },
+        }
+      };
+
+      const selectedSensitivity = device === "iPhone" ? sensitivity.iPhone[model] : sensitivity.default[model];
+
+      if (!selectedSensitivity) {
+        table.innerHTML = "<p>No data available for this combination.</p>";
+        return;
+      }
+
+      table.innerHTML = `
+        <table>
+          <tr><th>General</th><th>Red Dot</th><th>2x Scope</th><th>4x Scope</th><th>Sniper Scope</th><th>Free Look</th></tr>
+          <tr>
+            <td>${selectedSensitivity.general}</td>
+            <td>${selectedSensitivity.redDot}</td>
+            <td>${selectedSensitivity.scope2x}</td>
+            <td>${selectedSensitivity.scope4x}</td>
+            <td>${selectedSensitivity.sniper}</td>
+            <td>${selectedSensitivity.freeLook}</td>
+          </tr>
+        </table>
+      `;
+    }
+
+    // ✅ Unmute video on user interaction
+    document.addEventListener('click', () => {
+      const video = document.getElementById('bgVideo');
+      video.muted = false;
+      video.volume = 1.0;
+      video.play();
+    }, { once: true });
+  </script>
+
+</body></html>
